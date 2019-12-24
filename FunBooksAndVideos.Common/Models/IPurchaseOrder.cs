@@ -8,7 +8,7 @@ namespace FunBooksAndVideos.Common.Models
     {
         int Id { get; set; }
 
-        decimal Total { get; }
+        double Total { get; }
 
         int CustomerId { get; set; }
 

@@ -9,7 +9,7 @@ namespace FunBooksAndVideos.Common.Models
     {
         public int Id { get; set; }
 
-        public decimal Total
+        public double Total
         {
             get
             {
