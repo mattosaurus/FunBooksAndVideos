@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FunBooksAndVideos.Common.Models
 {
-    public class PurchaseInterface : IPurchaseOrder
+    public class Book : PhysicalProduct
     {
     }
 }

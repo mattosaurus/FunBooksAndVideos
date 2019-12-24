@@ -4,10 +4,12 @@ using System.Text;
 
 namespace FunBooksAndVideos.Common.Models
 {
-    public class PurchaseItem : IPurchaseItem
+    public class Product
     {
         public int Id { get; set; }
 
-        public Product Product { get; set; }
+        public string Name { get; set; }
+
+        public decimal Value { get; set; }
     }
 }

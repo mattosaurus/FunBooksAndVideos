@@ -4,10 +4,9 @@ using System.Text;
 
 namespace FunBooksAndVideos.Common.Models
 {
-    public class PurchaseItem : IPurchaseItem
+    public enum MembershipType
     {
-        public int Id { get; set; }
-
-        public Product Product { get; set; }
+        Video,
+        Book
     }
 }

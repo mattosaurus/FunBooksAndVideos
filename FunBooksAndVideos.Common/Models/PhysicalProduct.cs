@@ -4,9 +4,7 @@ using System.Text;
 
 namespace FunBooksAndVideos.Common.Models
 {
-    public enum PurchaseItemType
+    public class PhysicalProduct : Product
     {
-        Video,
-        Book
     }
 }
