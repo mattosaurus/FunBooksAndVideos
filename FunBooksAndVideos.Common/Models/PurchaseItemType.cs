@@ -6,5 +6,7 @@ namespace FunBooksAndVideos.Common.Models
 {
     public enum PurchaseItemType
     {
+        Video,
+        Book
     }
 }
