@@ -8,6 +8,6 @@ namespace FunBooksAndVideos.Common.Services
 {
     public interface IShippingService
     {
-        Task<ShippingSlip> GenerateShippingSlipAsync(int customerId, IEnumerable<PurchaseItem> purchaseItems);
+        Task<ShippingSlip> GenerateShippingSlipAsync(int customerId, IEnumerable<IPurchaseItem> purchaseItems);
     }
 }
