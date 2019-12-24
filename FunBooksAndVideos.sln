@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunBooksAndVideos.Common", "FunBooksAndVideos.Common\FunBooksAndVideos.Common.csproj", "{9636FADB-F9CE-4C09-98BE-15F6F662F0EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunBooksAndVideos.Tests", "FunBooksAndVideos.Tests\FunBooksAndVideos.Tests.csproj", "{523F0EF8-2056-4358-B756-C5DBB047E487}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9636FADB-F9CE-4C09-98BE-15F6F662F0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9636FADB-F9CE-4C09-98BE-15F6F662F0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9636FADB-F9CE-4C09-98BE-15F6F662F0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{523F0EF8-2056-4358-B756-C5DBB047E487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{523F0EF8-2056-4358-B756-C5DBB047E487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{523F0EF8-2056-4358-B756-C5DBB047E487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{523F0EF8-2056-4358-B756-C5DBB047E487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
