@@ -1,8 +1,10 @@
 ﻿using FunBooksAndVideos.Common.Models;
+using FunBooksAndVideos.Common.Rules;
 using FunBooksAndVideos.Common.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +26,44 @@ namespace FunBooksAndVideos.Tests
             mockShippingService.Setup(shippingService => shippingService.GenerateShippingSlipAsync(It.IsAny<int>(), It.IsAny<IEnumerable<IPurchaseItem>>())).Returns(Task.FromResult(shippingSlip));
 
             return mockShippingService;
+        }
+
+        public static Mock<IShippingService> CreateMockShippingService(IEnumerable<PhysicalProduct> products)
+        {
+            var mockShippingService = new Mock<IShippingService>();
+            ShippingSlip shippingSlip = GetShippingSlip(products);
+            mockShippingService.Setup(shippingService => shippingService.GenerateShippingSlipAsync(It.IsAny<int>(), It.IsAny<IEnumerable<IPurchaseItem>>())).Returns(Task.FromResult(shippingSlip));
+
+            return mockShippingService;
+        }
+
+        public static IRule CreateMembershipActivationRule()
+        {
+            return new MembershipActivationRule(CreateMockCustomerService().Object);
+        }
+
+        public static IRule CreateMembershipActivationRule(ICustomerService customerService)
+        {
+            return new MembershipActivationRule(customerService);
+        }
+
+        public static IRule CreatePhysicalProductShippingSlipRule(IEnumerable<PhysicalProduct> products)
+        {
+            return new PhysicalProductShippingSlipRule(CreateMockShippingService(GetShippingSlip(products)).Object);
+        }
+
+        public static IRule CreatePhysicalProductShippingSlipRule(IShippingService shippingService)
+        {
+            return new PhysicalProductShippingSlipRule(shippingService);
+        }
+
+        public static RulesProcessor CreateRulesProcessor()
+        {
+            List<IRule> rules = new List<IRule>();
+            rules.Add(CreateMembershipActivationRule());
+            rules.Add(CreatePhysicalProductShippingSlipRule(GetPhysicalProducts()));
+
+            return new RulesProcessor(rules);
         }
 
         public static IEnumerable<PhysicalProduct> GetPhysicalProducts()
@@ -57,6 +97,49 @@ namespace FunBooksAndVideos.Tests
                     MembershipType = MembershipType.Book
                 }
             };
+        }
+
+        public static IEnumerable<PurchaseItem> GetPurchaseItems()
+        {
+            List<PurchaseItem> purchaseItems = new List<PurchaseItem>();
+
+            purchaseItems.AddRange(GetPhysicalProducts().Select(x => new PurchaseItem() { Id = x.Id, Product = x }));
+            purchaseItems.AddRange(GetMembershipProducts().Select(x => new PurchaseItem() { Id = x.Id, Product = x }));
+
+            return purchaseItems;
+        }
+
+        public static IEnumerable<PurchaseItem> GetPurchaseItems(IEnumerable<Product> products)
+        {
+            List<PurchaseItem> purchaseItems = new List<PurchaseItem>();
+
+            purchaseItems.AddRange(products.Select(x => new PurchaseItem() { Id = x.Id, Product = x }));
+
+            return purchaseItems;
+        }
+
+        public static PurchaseOrder GetPurchaseOrder()
+        {
+            PurchaseOrder purchaseOrder = new PurchaseOrder()
+            {
+                Id = 987654321,
+                CustomerId = 987,
+                Items = GetPurchaseItems()
+            };
+
+            return purchaseOrder;
+        }
+
+        public static PurchaseOrder GetPurchaseOrder(IEnumerable<PurchaseItem> purchaseItems)
+        {
+            PurchaseOrder purchaseOrder = new PurchaseOrder()
+            {
+                Id = 987654321,
+                CustomerId = 987,
+                Items = purchaseItems
+            };
+
+            return purchaseOrder;
         }
 
         public static ShippingSlip GetShippingSlip(IEnumerable<PhysicalProduct> products)

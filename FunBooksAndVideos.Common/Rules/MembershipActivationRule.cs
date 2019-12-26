@@ -19,7 +19,7 @@ namespace FunBooksAndVideos.Common.Rules
 
         public async Task ApplyRuleAsync(IPurchaseOrder purchaseOrder)
         {
-            var memberships = purchaseOrder.Items.Where(x => x.Product is MembershipProduct);
+            var memberships = purchaseOrder.Items.Where(x => x.Product is MembershipProduct).Select(x => x.Product);
 
             foreach (MembershipProduct membership in memberships)
             {
